@@ -3,11 +3,12 @@
 import React, { useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
 import NFTItem from './NFTItem';
+import NoResult from './NoResult';
 
 const NFTList = () => {
-  // const { address } = useAccount();
+  const { address } = useAccount();
   const [nfts, setNfts] = useState([]);
-  const address = '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270';
+  // const address = '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270';
 
   const fetchNFTs = async () => {
     const res = await fetch(`/api/nft?address=${address}`, {
@@ -22,12 +23,14 @@ const NFTList = () => {
       fetchNFTs();
     }
   }, [address]);
-  return (
+  return nfts.length > 0 ? (
     <section className="pb-[58px] py-20 grid-cols-1 lg:py-20 gap-7 lg:gap-10 grid md:grid-cols-2 lg:grid-cols-3">
       {nfts.map((nft, index) => {
         return <NFTItem key={index} item={nft} />;
       })}
     </section>
+  ) : (
+    <NoResult />
   );
 };
 
