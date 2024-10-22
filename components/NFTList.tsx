@@ -43,7 +43,7 @@ const NFTList = () => {
     }
   }, [address]);
   return (
-    <section className="pb-[58px] lg:py-20 gap-7 lg:gap-10 grid md:grid-cols-2 lg:grid-cols-3">
+    <section className="pb-[58px] py-20 grid-cols-1 lg:py-20 gap-7 lg:gap-10 grid md:grid-cols-2 lg:grid-cols-3">
       {nfts.map((nft, index) => {
         return <NFTItem key={index} item={nft} />;
       })}
