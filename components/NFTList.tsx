@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
 import NFTItem from './NFTItem';
 
@@ -29,8 +29,14 @@ const NFT_LIST = [
 
 const NFTList = () => {
   const { address } = useAccount();
-  console.log(address);
-  const fetchNFTs = async () => {};
+  const [nfts, setNfts] = useState([]);
+  const fetchNFTs = async () => {
+    const res = await fetch('/api/nft', {
+      method: 'GET',
+    });
+    const data = await res.json();
+    setNfts(data?.ownedNfts || []);
+  };
   useEffect(() => {
     if (address) {
       fetchNFTs();
@@ -38,7 +44,7 @@ const NFTList = () => {
   }, [address]);
   return (
     <section className="pb-[58px] lg:py-20 gap-7 lg:gap-10 grid md:grid-cols-2 lg:grid-cols-3">
-      {NFT_LIST.map((nft, index) => {
+      {nfts.map((nft, index) => {
         return <NFTItem key={index} item={nft} />;
       })}
     </section>
