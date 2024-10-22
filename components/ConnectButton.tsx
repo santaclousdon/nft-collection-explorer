@@ -1,10 +1,10 @@
+'use client';
+
 import React from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';

@@ -10,7 +10,7 @@ type ImageModalProps = {
 const ImageModal = ({ source, closeModal, isModalOpen }: ImageModalProps) => {
   return (
     <Dialog open={isModalOpen} onOpenChange={closeModal}>
-      <DialogTitle>NFT Image</DialogTitle>
+      <DialogTitle className="invisible">NFT Image</DialogTitle>
       <DialogContent className="bg-grey-line/60">
         <img
           src={source || '/images/nft-placeholder.png'}
