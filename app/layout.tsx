@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className="bg-black text-white">
         <Providers>
           <Header />
-          <main>{children}</main>
+          <main className="min-h-[calc(100vh-60px)]">{children}</main>
           <Footer />
         </Providers>
       </body>
