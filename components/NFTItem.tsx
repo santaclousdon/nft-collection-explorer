@@ -32,7 +32,7 @@ const NFTItem = ({ item }: { item: any }) => {
         <div onClick={handleImageClick} className="cursor-pointer">
           <img
             src={item?.image.originalUrl || '/images/nft-placeholder.png'}
-            className="animate hover:scale-[1.1] w-full h-[400px] object-cover"
+            className="animate hover:scale-[1.1] w-full h-[400px] object-cover rounded-lg"
             alt="nft placeholder"
           />
         </div>

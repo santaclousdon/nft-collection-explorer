@@ -1,4 +1,6 @@
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+'use client';
+
+import ConnectButton from './ConnectButton';
 
 const Header = () => {
   return (
