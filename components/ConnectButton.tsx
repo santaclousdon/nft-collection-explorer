@@ -26,19 +26,24 @@ const ConnectButton = () => {
       {address ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="secondary">{abbreviatedAddress}</Button>
+            <Button
+              variant="secondary"
+              className="border border-white rounded-[12px]"
+            >
+              {abbreviatedAddress}
+            </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="bg-gray-700 border-none text-white">
-            <DropdownMenuItem
-              onClick={() => disconnect()}
-              className="text-center"
-            >
+            <DropdownMenuItem onClick={() => disconnect()}>
               Disconnect
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       ) : (
-        <Button onClick={() => connect({ connector: injected() })}>
+        <Button
+          onClick={() => connect({ connector: injected() })}
+          className="border border-white rounded-[12px]"
+        >
           Connect Wallet
         </Button>
       )}

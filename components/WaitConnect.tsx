@@ -13,8 +13,8 @@ export const WaitConnect = () => {
           Avocado NFT LIST
         </h2>
         <p className="w-fit font-satoshi-bold text-lg leading-[1.4] text-gradient mb-6 lg:text-[24px] lg:mb-12 text-center">
-          Wallet is not connected. Please connect wallet by clicking Connect
-          Wallet to see your NFT list.
+          Your wallet is currently disconnected. Please connect your wallet to
+          access and view your exclusive NFT collection.
         </p>
       </div>
     </section>
