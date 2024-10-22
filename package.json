@@ -11,6 +11,7 @@
   "dependencies": {
     "@rainbow-me/rainbowkit": "^2.2.0",
     "@wagmi/core": "^2.14.1",
+    "alchemy-sdk": "^3.4.4",
     "avocado": "file:",
     "ethers": "^6.13.4",
     "next": "15.0.0",

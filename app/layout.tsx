@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 
 import '@rainbow-me/rainbowkit/styles.css';
 import { Providers } from '../providers';
+import Header from '@/components/Header';
 
 export default function RootLayout({
   children,
@@ -20,9 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className="bg-black text-white">
         <Providers>
-          <div className="h-screen w-screen flex flex-col">{children}</div>
+          <Header />
+          <main>{children}</main>
         </Providers>
       </body>
     </html>

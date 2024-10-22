@@ -1,14 +1,11 @@
 'use client';
 
-import { useAccount } from 'wagmi';
-import Header from '../components/Header';
+import NFTList from '@/components/NFTList';
 
 export default function Home() {
-  const { address } = useAccount();
-  console.log(address);
   return (
-    <div>
-      <Header />
+    <div className="max-w-[1480px] px-4 py-10 lg:px-5 xl:mx-auto">
+      <NFTList />
     </div>
   );
 }
