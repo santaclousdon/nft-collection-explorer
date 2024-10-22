@@ -13,13 +13,22 @@ import { Button } from '@/components/ui/button';
 
 const ConnectButton = () => {
   const { connect } = useConnect();
-
   const { disconnect } = useDisconnect();
   const { address } = useAccount();
+
+  // New state to track if the component has mounted
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const abbreviatedAddress = address
     ? `${address.slice(0, 6)}...${address.slice(-4)}`
     : '';
+
+  // Render only after the component has mounted
+  if (!mounted) return null;
 
   return (
     <>

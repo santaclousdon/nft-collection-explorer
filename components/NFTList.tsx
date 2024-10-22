@@ -6,19 +6,23 @@ import NFTItem from './NFTItem';
 import NoResult from './NoResult';
 
 const NFTList = () => {
-  // const { address } = useAccount();
-  const [loading, setLoading] = useState(true);
-  const [nfts, setNfts] = useState([]);
-  const address = '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270';
+  const { address } = useAccount();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [nfts, setNfts] = useState<any[]>([]);
 
   const fetchNFTs = async () => {
     setLoading(true);
     const res = await fetch(`/api/nft?address=${address}`, {
       method: 'GET',
     });
-    const data = await res.json();
-    setNfts(data?.ownedNfts || []);
-    setLoading(false);
+    if (res.status === 200) {
+      const data = await res.json();
+      setNfts(data?.ownedNfts || []);
+      setLoading(false);
+    } else {
+      console.log('Error fetching NFTs:', res.status);
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
