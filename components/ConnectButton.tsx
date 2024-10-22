@@ -28,13 +28,16 @@ const ConnectButton = () => {
           <DropdownMenuTrigger asChild>
             <Button
               variant="secondary"
-              className="border border-white rounded-[12px]"
+              className="border border-white rounded-[12px] hover:bg-white hover:text-black"
             >
               {abbreviatedAddress}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="bg-gray-700 border-none text-white">
-            <DropdownMenuItem onClick={() => disconnect()}>
+            <DropdownMenuItem
+              onClick={() => disconnect()}
+              className="cursor-pointer"
+            >
               Disconnect
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -42,7 +45,7 @@ const ConnectButton = () => {
       ) : (
         <Button
           onClick={() => connect({ connector: injected() })}
-          className="border border-white rounded-[12px]"
+          className="border border-white rounded-[12px] hover:bg-white hover:text-black"
         >
           Connect Wallet
         </Button>

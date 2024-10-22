@@ -6,9 +6,9 @@ const config = {
 };
 const alchemy = new Alchemy(config);
 
-export async function GET() {
-  const nfts = await alchemy.nft.getNftsForOwner(
-    '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270'
-  );
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const address = searchParams.get('address');
+  const nfts = await alchemy.nft.getNftsForOwner(address || '');
   return Response.json(nfts);
 }
