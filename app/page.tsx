@@ -1,3 +1,14 @@
+'use client';
+
+import { useAccount } from 'wagmi';
+import Header from '../components/Header';
+
 export default function Home() {
-  return <div>NFT Viewer</div>;
+  const { address } = useAccount();
+  console.log(address);
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 }
