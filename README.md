@@ -10,6 +10,21 @@ This application allows users to:
 - View their NFT collections
 - See detailed NFT information including images and metadata
 
+## Features
+
+- **Wallet Connect**: Seamlessly connect your Ethereum-compatible wallets using **wagmi**.
+- **Switch Wallet**: Automatically detects the connected network and prompts users to switch to the **Ethereum mainnet** if necessary.
+
+- **Display NFT Collections**: View a visually appealing grid of NFTs owned by the connected wallet address.
+
+- **Detail View Modal**: Click on an NFT to access detailed information, including contract address, deployer address, name, symbol, and token type, all presented in a user-friendly modal.
+
+- **Transaction History**: Effortlessly fetch and display transaction history for a selected NFT via the **Alchemy API**, with details shown in a structured table.
+
+- **External Links**: Easily redirect to **Etherscan** for contract addresses and transaction hashes.
+
+- **Responsive UI/UX**: Enjoy a responsive layout with animations, crafted using **Tailwind CSS** for an enhanced user experience.
+
 ## Getting Started
 
 1. Clone the repository

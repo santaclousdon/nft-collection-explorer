@@ -30,7 +30,7 @@ const TextSection: React.FC<MessageSectionProps> = ({ message }) => (
 // Component to display message with video background
 const MessageDisplay: React.FC<MessageSectionProps> = ({ message }) => {
   return (
-    <section className="flex flex-col gap-y-10 items-center lg:flex-row-reverse pt-20 px-10 gap-x-10">
+    <section className="flex flex-col gap-y-10 items-center lg:flex-row-reverse pt-20 px-10 gap-x-10 lg:h-[calc(100vh-204px)]">
       <VideoSection />
       <TextSection message={message} />
     </section>
