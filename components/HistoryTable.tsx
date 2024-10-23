@@ -22,7 +22,7 @@ type HistoryTableProps = {
  * HistoryTable displays NFT transfer history in a tabular format
  * Shows transaction hash, block number, from/to addresses and timestamp
  */
-const HistoryTable: React.FC<HistoryTableProps> = React.memo(({ history }) => {
+const HistoryTable: React.FC<HistoryTableProps> = ({ history }) => {
   const isMobile = useIsMobile();
   const [tooltipVisible, setTooltipVisible] = useState<{
     [key: string]: boolean;
@@ -105,6 +105,6 @@ const HistoryTable: React.FC<HistoryTableProps> = React.memo(({ history }) => {
       </TableBody>
     </Table>
   );
-});
+};
 
 export default HistoryTable;
