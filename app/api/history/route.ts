@@ -21,7 +21,6 @@ export async function GET(request: Request) {
         excludeZeroValue: false,
         category: ['erc721', 'erc1155'],
         order: 'asc',
-        maxCount: '0xA',
       },
     ],
   });
@@ -35,33 +34,19 @@ export async function GET(request: Request) {
     data: data,
   };
 
-  const response = await axios(config);
-  console.log('------------------------------');
-  console.log(tokenId);
-  console.log(response.data.result);
+  try {
+    const response = await axios(config);
 
-  // let index = 1;
-  const transfers = response.data.result.transfers.filter(
-    (transfer: any) =>
-      web3.utils.hexToNumber(transfer['erc721TokenId']) === parseInt(tokenId)
-  );
-  return Response.json(transfers);
+    const transfers = response.data.result.transfers.filter((transfer: any) => {
+      if (transfer['tokenId']) {
+        return (
+          web3.utils.hexToNumber(transfer['tokenId']) === parseInt(tokenId)
+        );
+      }
+    });
+    return Response.json(transfers);
+  } catch (error) {
+    console.error('Error fetching asset transfers:', error);
+    return new Response('Error fetching asset transfers', { status: 500 });
+  }
 }
-//   // console.log("------------------------------")
-//   // const nfts = await alchemy.core.getAssetTransfers({
-//   //   // contractAddresses: [address],
-//   //   // withMetadata: true,
-//   //   // category: [AssetTransfersCategory.ERC721, AssetTransfersCategory.ERC1155],
-//   //   fromBlock: '0x0',
-//   //   fromAddress: '0x0000000000000000000000000000000000000000',
-//   //   toAddress: '0x1E6E8695FAb3Eb382534915eA8d7Cc1D1994B152',
-//   //   excludeZeroValue: true,
-//   //   category: [AssetTransfersCategory.ERC721, AssetTransfersCategory.ERC1155],
-//   // });
-
-//   console.log(nfts);
-//   return Response.json(nfts);
-// } catch (error) {
-//   console.error(error);
-//   return new Response('Failed to fetch NFTs', { status: 500 });
-// }

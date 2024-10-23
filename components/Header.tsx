@@ -25,7 +25,7 @@ const Header: React.FC = () => {
   // Update header style based on scroll position
   useEffect(() => {
     setHeaderStyle({
-      backgroundColor: scrollY > 50 ? '#000' : 'transparent',
+      backgroundColor: scrollY > 50 ? '#000000ea' : 'transparent',
     });
   }, [scrollY]);
 
