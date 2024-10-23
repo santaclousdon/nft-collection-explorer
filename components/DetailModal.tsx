@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
-import Link from 'next/link';
+import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { NFT } from '@/types/types';
+import { Clipboard } from 'lucide-react';
+import useIsMobile from '@/hook/useIsMobile';
 
 type DetailModalProps = {
   source: NFT;
@@ -14,6 +15,7 @@ const DetailModal: React.FC<DetailModalProps> = ({
   closeModal,
   isModalOpen,
 }) => {
+  const isMobile = useIsMobile();
   // const fetchHistory = async () => {
   //   const res = await fetch(
   //     `/api/history?address=${source?.contract.address}&tokenId=${source?.tokenId}`
@@ -27,11 +29,28 @@ const DetailModal: React.FC<DetailModalProps> = ({
   // useEffect(() => {''
   //   fetchHistory();
   // }, [source?.contract.address]);
+  const abbreviateAddress = (address: string) => {
+    if (isMobile) return `${address.slice(0, 8)}...${address.slice(-4)}`;
+    return `${address.slice(0, 20)}...${address.slice(-4)}`;
+  };
+  const [tooltipVisible, setTooltipVisible] = useState<{
+    [key: string]: boolean;
+  }>({});
+
+  const copyToClipboard = (text: string, key: string) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setTooltipVisible({ ...tooltipVisible, [key]: true });
+      setTimeout(() => {
+        setTooltipVisible({ ...tooltipVisible, [key]: false });
+      }, 1000);
+    });
+  };
+
   return (
     <Dialog open={isModalOpen} onOpenChange={closeModal}>
       <DialogTitle className="invisible">{source?.name}</DialogTitle>
-      <DialogContent className="bg-grey-line px-4 md:px-6 py-4 rounded-lg ">
-        <h2 className="text-white text-3xl font-bold text-center mb-4">
+      <DialogContent className="bg-grey-line px-4 md:px-6 py-4 rounded-lg border-none max-h-[calc(100vh-200px)] overflow-y-auto">
+        <h2 className="font-monument text-white text-3xl font-bold text-center mb-4">
           {source?.name}
         </h2>
         {source?.image?.contentType !== 'video/mp4' ? (
@@ -57,10 +76,42 @@ const DetailModal: React.FC<DetailModalProps> = ({
         <div className="mb-6">
           <h2 className="text-xl font-semibold mb-2">Contract Details:</h2>
           <p className="max-w-[300px] md:max-w-full overflow-ellipsis overflow-hidden">
-            <strong>Address:</strong> {source?.contract.address}
+            <strong>Address:</strong>{' '}
+            {abbreviateAddress(source?.contract.address)}
+            <button
+              onClick={() =>
+                copyToClipboard(source?.contract.address, 'contractAddress')
+              }
+              className="ml-2 relative"
+            >
+              <Clipboard size={14} />
+
+              {tooltipVisible.contractAddress && (
+                <p className="text-white absolute top-[-8px] right-[-60px] text-xs p-2 bg-black rounded-[12px]">
+                  Copied
+                </p>
+              )}
+            </button>
           </p>
           <p className="max-w-[300px] md:max-w-full overflow-ellipsis overflow-hidden">
-            <strong>Deployer:</strong> {source?.contract.contractDeployer}
+            <strong>Deployer:</strong>{' '}
+            {abbreviateAddress(source?.contract.contractDeployer)}
+            <button
+              onClick={() =>
+                copyToClipboard(
+                  source?.contract.contractDeployer,
+                  'deployerAddress'
+                )
+              }
+              className="ml-2 relative"
+            >
+              <Clipboard size={14} />
+              {tooltipVisible.deployerAddress && (
+                <p className="text-white absolute top-[-8px] right-[-60px] text-xs p-2 bg-black rounded-[12px]">
+                  Copied
+                </p>
+              )}
+            </button>
           </p>
           <p>
             <strong>Name:</strong> {source?.contract.name}
@@ -75,33 +126,9 @@ const DetailModal: React.FC<DetailModalProps> = ({
             <strong>Token Type:</strong> {source?.contract.tokenType}
           </p>
         </div>
-
-        <div className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">Links:</h2>
-          {source?.raw.metadata?.home_url && (
-            <p>
-              <strong>POAP Link:</strong>{' '}
-              <Link
-                href={source?.raw.metadata?.home_url || '#'}
-                target="_blank"
-                className="text-blue-500 underline hover:text-blue-700 transition"
-              >
-                View on POAP
-              </Link>
-            </p>
-          )}
-          {source?.raw.metadata?.external_url && (
-            <p>
-              <strong>External Link:</strong>{' '}
-              <Link
-                href={source?.raw.metadata?.external_url || '#'}
-                target="_blank"
-                className="text-blue-500 underline hover:text-blue-700 transition"
-              >
-                View
-              </Link>
-            </p>
-          )}
+        <div className="description">
+          <h2 className="text-xl font-semibold mb-2">Description:</h2>
+          <p>{source?.description}</p>
         </div>
       </DialogContent>
     </Dialog>
