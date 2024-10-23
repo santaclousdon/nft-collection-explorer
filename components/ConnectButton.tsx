@@ -10,13 +10,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import NetworkSwitcher from './SwtichButton';
-import { WalletOptions } from './WalletOptions';
 import WalletListModal from './WalletListModal';
-
-const ConnectWallet = () => {
-  const { isConnected } = useAccount();
-  if (!isConnected) return <WalletOptions />;
-};
 
 const ConnectButton: React.FC = () => {
   const { disconnect } = useDisconnect();
@@ -43,7 +37,7 @@ const ConnectButton: React.FC = () => {
       <DropdownMenuTrigger asChild>
         <Button
           variant="secondary"
-          className="text-xl border border-white rounded-[12px] hover:bg-blue hover:text-white"
+          className="text-xl border border-white rounded-[12px]  hover:bg-blue hover:border-transparent hover:text-white"
         >
           {abbreviatedAddress}
         </Button>
@@ -65,7 +59,7 @@ const ConnectButton: React.FC = () => {
   const renderConnectButton = () => (
     <Button
       onClick={() => setShowConnectWallet(true)}
-      className="text-xl border border-white rounded-[12px] hover:bg-blue hover:text-white"
+      className="text-xl border border-white rounded-[12px] hover:bg-blue hover:border-transparent hover:text-white"
     >
       Connect
     </Button>

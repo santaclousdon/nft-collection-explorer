@@ -18,7 +18,7 @@ const WalletListModal: React.FC<IWalletListModal> = ({
   return (
     <Dialog open={showConnectWallet} onOpenChange={setShowConnectWallet}>
       <DialogTitle className="hidden">Select Wallet</DialogTitle>
-      <DialogContent className="bg-grey-line px-4 md:px-6 py-8 rounded-lg">
+      <DialogContent className="bg-white px-4 md:px-6 py-8  border-none">
         <ConnectWallet />
       </DialogContent>
     </Dialog>

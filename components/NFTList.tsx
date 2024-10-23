@@ -9,6 +9,7 @@ import { NFT } from '@/types/types';
 // Component to fetch and display user's NFT collection
 const NFTList: React.FC = () => {
   const { address } = useAccount();
+
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [nfts, setNfts] = useState<NFT[]>([]);
