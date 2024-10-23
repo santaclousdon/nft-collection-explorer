@@ -8,6 +8,7 @@ import { NoResult } from './WaitConnect';
 const NFTList: React.FC = () => {
   const { address } = useAccount();
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   const [nfts, setNfts] = useState<any[]>([]);
 
   const fetchNFTs = async () => {
@@ -21,6 +22,7 @@ const NFTList: React.FC = () => {
         setNfts(data?.ownedNfts || []);
         console.log(data);
       } else {
+        setError('Error fetching NFTs');
         console.error('Error fetching NFTs:', res.status);
       }
     } catch (error) {
@@ -41,7 +43,11 @@ const NFTList: React.FC = () => {
       <div className="skeleton-loader">Loading...</div>
     </div>
   );
-
+  const renderError = () => (
+    <div className="flex justify-center items-center h-screen">
+      <p className="text-xl font-bold">{error}</p>
+    </div>
+  );
   const renderNFTs = () => (
     <section className="pb-[58px] py-20 grid-cols-1 lg:py-20 gap-7 lg:gap-10 grid md:grid-cols-2 lg:grid-cols-3">
       {nfts.map((nft, index) => (
@@ -54,6 +60,8 @@ const NFTList: React.FC = () => {
 
   return loading
     ? renderLoading()
+    : error
+    ? renderError()
     : nfts.length > 0
     ? renderNFTs()
     : renderNoResult();
