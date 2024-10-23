@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { injected } from 'wagmi/connectors';
 import { Button } from '@/components/ui/button';
+import NetworkSwitcher from './SwtichButton';
 
 const ConnectButton: React.FC = () => {
   const { connect } = useConnect();
@@ -44,6 +45,10 @@ const ConnectButton: React.FC = () => {
           className="cursor-pointer"
         >
           Disconnect
+        </DropdownMenuItem>
+
+        <DropdownMenuItem>
+          <NetworkSwitcher />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
