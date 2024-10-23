@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useAccount } from 'wagmi';
 import NFTItem from './NFTItem';
 import { NoResult } from './WaitConnect';
@@ -15,7 +15,7 @@ const NFTList: React.FC = () => {
   const [nfts, setNfts] = useState<NFT[]>([]);
 
   // Fetch NFTs from the API for connected wallet
-  const fetchNFTs = async () => {
+  const fetchNFTs = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch(`/api/nft?address=${address}`, {
@@ -33,14 +33,14 @@ const NFTList: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [address]);
 
   // Fetch NFTs when wallet address changes
   useEffect(() => {
     if (address) {
       fetchNFTs();
     }
-  }, [address]);
+  }, [address, fetchNFTs]); // Added fetchNFTs to the dependency array
 
   // Render functions for different states
   const renderLoading = () => (
