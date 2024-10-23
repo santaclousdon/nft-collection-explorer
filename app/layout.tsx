@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className="bg-black text-white font-satoshi-regular">
         <Providers>
           <Header />
-          <main className="min-h-[calc(100vh-20px)]">{children}</main>
+          <main className="min-h-[calc(100vh-80px)]">{children}</main>
           <Footer />
         </Providers>
       </body>

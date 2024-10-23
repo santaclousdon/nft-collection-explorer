@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { NFT } from '@/types/types';
@@ -14,6 +14,19 @@ const DetailModal: React.FC<DetailModalProps> = ({
   closeModal,
   isModalOpen,
 }) => {
+  // const fetchHistory = async () => {
+  //   const res = await fetch(
+  //     `/api/history?address=${source?.contract.address}&tokenId=${source?.tokenId}`
+  //   );
+  //   if (res.ok) {
+  //     const data = await res.json();
+  //     console.log(data);
+  //   }
+  // };
+
+  // useEffect(() => {''
+  //   fetchHistory();
+  // }, [source?.contract.address]);
   return (
     <Dialog open={isModalOpen} onOpenChange={closeModal}>
       <DialogTitle className="invisible">{source?.name}</DialogTitle>

@@ -14,7 +14,7 @@ import WalletListModal from './WalletListModal';
 
 const ConnectButton: React.FC = () => {
   const { disconnect } = useDisconnect();
-  const { address } = useAccount();
+  const { address, chainId } = useAccount();
 
   const [mounted, setMounted] = useState<boolean>(false);
   const [showConnectWallet, setShowConnectWallet] = useState<boolean>(false);
@@ -42,16 +42,18 @@ const ConnectButton: React.FC = () => {
           {abbreviatedAddress}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-gray-900 border-none rounded-[5px] text-white">
+      <DropdownMenuContent className="bg-transparent text-white shadow-lg p-0 rounded-[10px] mr-0">
         <DropdownMenuItem
           onClick={() => disconnect()}
-          className="cursor-pointer"
+          className="cursor-pointer hover:bg-gray-700 rounded-md p-2 w-full mx-auto"
         >
           Disconnect
         </DropdownMenuItem>
-        <DropdownMenuItem>
-          <NetworkSwitcher />
-        </DropdownMenuItem>
+        {chainId !== 1 && (
+          <DropdownMenuItem className="hover:bg-gray-700 rounded-md p-2">
+            <NetworkSwitcher />
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -59,7 +61,7 @@ const ConnectButton: React.FC = () => {
   const renderConnectButton = () => (
     <Button
       onClick={() => setShowConnectWallet(true)}
-      className="text-xl border border-white rounded-[12px] hover:bg-blue hover:border-transparent hover:text-white"
+      className=" text-base md:text-xl border border-white rounded-[12px] px-2 md:px-5 py-0 md:py-2 hover:bg-blue hover:border-transparent hover:text-white"
     >
       Connect
     </Button>

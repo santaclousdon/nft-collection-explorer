@@ -34,8 +34,14 @@ const Header: React.FC = () => {
       className="animate fixed top-0 left-0 h-[78px] lg:h-[104px] w-full px-[15px] lg:px-[50px] py-5 lg:py-[30px] flex items-center justify-between z-10"
       style={headerStyle}
     >
-      <Link href="/" title="Avocado" aria-label="Avocado" className="z-10">
+      <Link
+        href="/"
+        title="Avocado"
+        aria-label="Avocado"
+        className="z-10 flex items-center gap-3"
+      >
         <Logo />
+        <h2 className="font-monument">Avocado DAO</h2>
       </Link>
 
       <div className="max-lg:pt-5 max-lg:pr-[15px] max-lg:pb-[30px] flex items-center justify-between">

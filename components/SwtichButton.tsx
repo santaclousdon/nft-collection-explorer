@@ -4,7 +4,6 @@ import { useAccount } from 'wagmi';
 const NetworkSwitcher = () => {
   const { chainId } = useAccount();
   const { switchChain } = useSwitchChain();
-  console.log(chainId);
   return (
     <div>
       {chainId !== 1 ? (
