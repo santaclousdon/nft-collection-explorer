@@ -5,12 +5,14 @@ import { useEffect, useState } from 'react';
 import ConnectButton from './ConnectButton';
 import Logo from './Logo';
 
+// Header component with dynamic background based on scroll position
 const Header: React.FC = () => {
   const [scrollY, setScrollY] = useState<number>(0);
   const [headerStyle, setHeaderStyle] = useState<{ backgroundColor: string }>({
     backgroundColor: 'transparent',
   });
 
+  // Handle scroll events to update header background
   const handleScroll = () => {
     setScrollY(window.scrollY);
   };
@@ -20,6 +22,7 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Update header style based on scroll position
   useEffect(() => {
     setHeaderStyle({
       backgroundColor: scrollY > 50 ? '#000' : 'transparent',

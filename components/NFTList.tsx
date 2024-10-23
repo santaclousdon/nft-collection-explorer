@@ -5,12 +5,14 @@ import { useAccount } from 'wagmi';
 import NFTItem from './NFTItem';
 import { NoResult } from './WaitConnect';
 
+// Component to fetch and display user's NFT collection
 const NFTList: React.FC = () => {
   const { address } = useAccount();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [nfts, setNfts] = useState<any[]>([]);
 
+  // Fetch NFTs from the API for connected wallet
   const fetchNFTs = async () => {
     setLoading(true);
     try {
@@ -32,12 +34,14 @@ const NFTList: React.FC = () => {
     }
   };
 
+  // Fetch NFTs when wallet address changes
   useEffect(() => {
     if (address) {
       fetchNFTs();
     }
   }, [address]);
 
+  // Render functions for different states
   const renderLoading = () => (
     <div className="flex justify-center items-center h-screen">
       <div className="skeleton-loader">Loading...</div>
@@ -58,6 +62,7 @@ const NFTList: React.FC = () => {
 
   const renderNoResult = () => <NoResult />;
 
+  // Conditional rendering based on state
   return loading
     ? renderLoading()
     : error

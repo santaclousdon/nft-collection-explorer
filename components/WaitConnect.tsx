@@ -4,6 +4,7 @@ type MessageSectionProps = {
   message: string;
 };
 
+// Video section component for the waiting state
 const VideoSection: React.FC = () => (
   <div className="relative lg:flex-1">
     <video autoPlay loop muted>
@@ -14,6 +15,7 @@ const VideoSection: React.FC = () => (
   </div>
 );
 
+// Text section component displaying message
 const TextSection: React.FC<MessageSectionProps> = ({ message }) => (
   <div className="lg:flex-1 flex flex-col items-center">
     <h2 className="font-monument uppercase text-[30px] md:text-[36px] leading-[1.2] mb-[20px] lg:mb-6 lg:text-[42px] text-center">
@@ -25,6 +27,7 @@ const TextSection: React.FC<MessageSectionProps> = ({ message }) => (
   </div>
 );
 
+// Component to display message with video background
 const MessageDisplay: React.FC<MessageSectionProps> = ({ message }) => {
   return (
     <section className="flex flex-col gap-y-10 items-center lg:flex-row-reverse pt-20 px-10 gap-x-10">
@@ -34,10 +37,12 @@ const MessageDisplay: React.FC<MessageSectionProps> = ({ message }) => {
   );
 };
 
+// Component shown when wallet is not connected
 export const WaitConnect: React.FC = () => (
   <MessageDisplay message="Your wallet is currently disconnected. Please connect your wallet to access and view your exclusive NFT collection." />
 );
 
+// Component shown when no NFTs are found
 export const NoResult: React.FC = () => (
   <MessageDisplay message="We can't find any NFTs for this wallet." />
 );

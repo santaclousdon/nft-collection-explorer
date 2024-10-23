@@ -5,11 +5,14 @@ import { useAccount } from 'wagmi';
 import NFTList from '@/components/NFTList';
 import WaitConnect from '@/components/WaitConnect';
 
+// Main page component that handles wallet connection state and renders appropriate content
 const Home: React.FC = () => {
   const { address } = useAccount();
+  // State to handle component mounting and wallet connection
   const [mounted, setMounted] = useState<boolean>(false);
   const [isAddressAvailable, setIsAddressAvailable] = useState<boolean>(false);
 
+  // Effect to handle wallet connection status
   useEffect(() => {
     setMounted(true);
     if (address) {
@@ -19,6 +22,7 @@ const Home: React.FC = () => {
     }
   }, [address]);
 
+  // Prevent hydration errors
   if (!mounted) {
     return null;
   }

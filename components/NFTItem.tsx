@@ -12,10 +12,13 @@ type NFTItemProps = {
   item: any;
 };
 
+// Component to display individual NFT card with details
 const NFTItem: React.FC<NFTItemProps> = ({ item }) => {
+  // State for modal visibility and selected NFT
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectNFT, setSelectNFT] = useState<any>(null);
 
+  // Handlers for modal open/close
   const handleImageClick = () => {
     setIsModalOpen(true);
     setSelectNFT(item);
@@ -31,6 +34,7 @@ const NFTItem: React.FC<NFTItemProps> = ({ item }) => {
         </CardTitle>
       </CardHeader>
       <CardContent>
+        {/* NFT media display - handles both images and videos */}
         <div
           onClick={handleImageClick}
           className="cursor-pointer w-full overflow-hidden"
@@ -59,6 +63,7 @@ const NFTItem: React.FC<NFTItemProps> = ({ item }) => {
           )}
         </div>
 
+        {/* Token type badge */}
         <div className="absolute right-[30px] top-[-10px] rounded-full bg-white text-black uppercase font-satoshi-bold text-xs px-[6px] py-[3px]">
           {item?.tokenType || 'ERC-721'}
         </div>
