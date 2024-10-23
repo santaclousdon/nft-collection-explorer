@@ -18,11 +18,19 @@ type HistoryTableProps = {
   history: Transfer[];
 };
 
+/**
+ * HistoryTable displays NFT transfer history in a tabular format
+ * Shows transaction hash, block number, from/to addresses and timestamp
+ */
 const HistoryTable: React.FC<HistoryTableProps> = React.memo(({ history }) => {
   const isMobile = useIsMobile();
   const [tooltipVisible, setTooltipVisible] = useState<{
     [key: string]: boolean;
   }>({});
+
+  /**
+   * Shortens address for display based on screen size
+   */
   const abbreviateAddress = useCallback(
     (address: string) => {
       if (isMobile) return `${address.slice(0, 4)}...${address.slice(-2)}`;
@@ -31,6 +39,9 @@ const HistoryTable: React.FC<HistoryTableProps> = React.memo(({ history }) => {
     [isMobile]
   );
 
+  /**
+   * Copies address to clipboard and shows tooltip
+   */
   const handleCopy = useCallback((address: string) => {
     navigator.clipboard.writeText(address);
     setTooltipVisible((prev) => ({ ...prev, [address]: true }));
@@ -39,6 +50,9 @@ const HistoryTable: React.FC<HistoryTableProps> = React.memo(({ history }) => {
     }, 2000);
   }, []);
 
+  /**
+   * Renders a table cell with address and copy button
+   */
   const renderAddressCell = (address: string, type: 'hash' | 'address') => (
     <div className="flex gap-x-2 items-center">
       <Link

@@ -7,14 +7,15 @@ import { NoResult } from './WaitConnect';
 import { NFT } from '@/types/types';
 import { Loader2 } from 'lucide-react';
 
-// Component to fetch and display user's NFT collection
 const NFTList: React.FC = () => {
   const { address } = useAccount();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [nfts, setNfts] = useState<NFT[]>([]);
 
-  // Fetch NFTs from the API for connected wallet
+  /**
+   * Fetches NFTs from the API for the connected wallet address
+   */
   const fetchNFTs = useCallback(async () => {
     setLoading(true);
     try {
@@ -40,19 +41,29 @@ const NFTList: React.FC = () => {
     if (address) {
       fetchNFTs();
     }
-  }, [address, fetchNFTs]); // Added fetchNFTs to the dependency array
+  }, [address, fetchNFTs]);
 
-  // Render functions for different states
+  /**
+   * Render loading spinner while fetching NFTs
+   */
   const renderLoading = () => (
     <div className="flex justify-center items-center h-screen">
       <Loader2 size={40} className="animate-spin" />
     </div>
   );
+
+  /**
+   * Render error message if NFT fetch fails
+   */
   const renderError = () => (
     <div className="flex justify-center items-center h-screen">
       <p className="text-xl font-bold">{error}</p>
     </div>
   );
+
+  /**
+   * Render grid of NFT items
+   */
   const renderNFTs = () => (
     <section className="pb-[58px] py-20 grid-cols-1 lg:py-20 gap-7 lg:gap-10 grid md:grid-cols-2 lg:grid-cols-3">
       {nfts.map((nft, index) => (
