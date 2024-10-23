@@ -1,25 +1,24 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import { injected } from 'wagmi/connectors';
 import { Button } from '@/components/ui/button';
 
-const ConnectButton = () => {
+const ConnectButton: React.FC = () => {
   const { connect } = useConnect();
   const { disconnect } = useDisconnect();
   const { address } = useAccount();
 
-  // New state to track if the component has mounted
-  const [mounted, setMounted] = React.useState(false);
+  const [mounted, setMounted] = useState<boolean>(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setMounted(true);
   }, []);
 
@@ -27,40 +26,39 @@ const ConnectButton = () => {
     ? `${address.slice(0, 6)}...${address.slice(-4)}`
     : '';
 
-  // Render only after the component has mounted
   if (!mounted) return null;
 
-  return (
-    <>
-      {address ? (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="secondary"
-              className="border border-white rounded-[12px] hover:bg-white hover:text-black"
-            >
-              {abbreviatedAddress}
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="bg-gray-700 border-none text-white">
-            <DropdownMenuItem
-              onClick={() => disconnect()}
-              className="cursor-pointer"
-            >
-              Disconnect
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      ) : (
+  const renderConnectedButton = () => (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
         <Button
-          onClick={() => connect({ connector: injected() })}
+          variant="secondary"
           className="border border-white rounded-[12px] hover:bg-white hover:text-black"
         >
-          Connect Wallet
+          {abbreviatedAddress}
         </Button>
-      )}
-    </>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="bg-gray-700 border-none text-white">
+        <DropdownMenuItem
+          onClick={() => disconnect()}
+          className="cursor-pointer"
+        >
+          Disconnect
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
+
+  const renderConnectButton = () => (
+    <Button
+      onClick={() => connect({ connector: injected() })}
+      className="border border-white rounded-[12px] hover:bg-white hover:text-black"
+    >
+      Connect Wallet
+    </Button>
+  );
+
+  return <>{address ? renderConnectedButton() : renderConnectButton()}</>;
 };
 
 export default ConnectButton;

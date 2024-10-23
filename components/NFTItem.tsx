@@ -8,7 +8,11 @@ import {
 } from '@/components/ui/card';
 import ImageModal from './ImageModal';
 
-const NFTItem = ({ item }: { item: any }) => {
+type NFTItemProps = {
+  item: any;
+};
+
+const NFTItem: React.FC<NFTItemProps> = ({ item }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
 
@@ -17,9 +21,7 @@ const NFTItem = ({ item }: { item: any }) => {
     setSelectedImage(item?.image.originalUrl);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  const closeModal = () => setIsModalOpen(false);
 
   return (
     <Card className="bg-grey-line/80 rounded-[12px] relative border-none shadow-outline shadow-white">

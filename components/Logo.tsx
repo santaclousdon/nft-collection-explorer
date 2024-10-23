@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Logo = () => {
+const Logo: React.FC = () => {
   return (
     <svg
       viewBox="0 0 519.39 541.24"

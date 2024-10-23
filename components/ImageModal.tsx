@@ -1,13 +1,18 @@
 import React from 'react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { DialogTitle } from '@radix-ui/react-dialog';
+
 type ImageModalProps = {
-  source: any;
+  source: string;
   closeModal: () => void;
   isModalOpen: boolean;
 };
 
-const ImageModal = ({ source, closeModal, isModalOpen }: ImageModalProps) => {
+const ImageModal: React.FC<ImageModalProps> = ({
+  source,
+  closeModal,
+  isModalOpen,
+}) => {
   return (
     <Dialog open={isModalOpen} onOpenChange={closeModal}>
       <DialogTitle className="invisible">NFT Image</DialogTitle>

@@ -1,8 +1,8 @@
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import React from 'react';
 
-const Footer = () => {
+const Footer: React.FC = () => {
   return (
     <footer className="w-full bg-gray-900/50 border-t border-t-gray-800">
       <div className="flex justify-between px-10 py-5">
@@ -17,7 +17,7 @@ const Footer = () => {
               width={20}
               height={20}
               alt="Telegram"
-            ></Image>
+            />
           </Link>
         </p>
         <p>Created by Robin</p>

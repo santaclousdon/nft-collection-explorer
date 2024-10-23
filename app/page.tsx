@@ -1,14 +1,14 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import { useAccount } from 'wagmi';
 import NFTList from '@/components/NFTList';
 import WaitConnect from '@/components/WaitConnect';
-import { useAccount } from 'wagmi';
-import { useEffect, useState } from 'react';
 
-export default function Home() {
+const Home: React.FC = () => {
   const { address } = useAccount();
-  const [mounted, setMounted] = useState(false);
-  const [isAddressAvailable, setIsAddressAvailable] = useState(false);
+  const [mounted, setMounted] = useState<boolean>(false);
+  const [isAddressAvailable, setIsAddressAvailable] = useState<boolean>(false);
 
   useEffect(() => {
     setMounted(true);
@@ -28,4 +28,5 @@ export default function Home() {
       {!isAddressAvailable ? <WaitConnect /> : <NFTList />}{' '}
     </div>
   );
-}
+};
+export default Home;

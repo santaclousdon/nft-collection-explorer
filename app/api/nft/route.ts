@@ -1,17 +1,11 @@
-import { Alchemy, Network } from 'alchemy-sdk';
-
-const config = {
-  apiKey: process.env.ALCHEMY_API_KEY,
-  network: Network.ETH_MAINNET,
-};
-const alchemy = new Alchemy(config);
+import { alchemy } from '@/config';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const address = searchParams.get('address');
+  const address = searchParams.get('address') || '';
 
   try {
-    const nfts = await alchemy.nft.getNftsForOwner(address || '');
+    const nfts = await alchemy.nft.getNftsForOwner(address);
     return Response.json(nfts);
   } catch (error) {
     console.error('Error fetching NFTs:', error);
