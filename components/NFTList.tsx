@@ -7,7 +7,7 @@ import { NoResult } from './WaitConnect';
 
 const NFTList: React.FC = () => {
   // const { address } = useAccount();
-  const address = '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270';
+  const address = '0x7b0F72BEc077e380BD548D13CCC0979160D5aA13';
   const [loading, setLoading] = useState<boolean>(true);
   const [nfts, setNfts] = useState<any[]>([]);
 
@@ -20,6 +20,7 @@ const NFTList: React.FC = () => {
       if (res.ok) {
         const data = await res.json();
         setNfts(data?.ownedNfts || []);
+        console.log(data);
       } else {
         console.error('Error fetching NFTs:', res.status);
       }

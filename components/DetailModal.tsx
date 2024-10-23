@@ -16,16 +16,29 @@ const DetailModal: React.FC<DetailModalProps> = ({
   return (
     <Dialog open={isModalOpen} onOpenChange={closeModal}>
       <DialogTitle className="invisible">{source?.name}</DialogTitle>
-      <DialogContent className="bg-grey-line px-4 md:px-6 py-4 rounded-lg">
+      <DialogContent className="bg-grey-line px-4 md:px-6 py-4 rounded-lg ">
         <h2 className="text-white text-3xl font-bold text-center mb-4">
           {source?.name}
         </h2>
-        <img
-          src={source?.image?.originalUrl || '/images/nft-placeholder.png'}
-          className="w-auto h-full rounded-lg max-h-[300px] mx-auto mb-4"
-          alt="nft enlarged"
-          onClick={(e) => e.stopPropagation()}
-        />
+        {source?.image?.contentType !== 'video/mp4' ? (
+          <img
+            src={source?.image?.cachedUrl || '/images/nft-placeholder.png'}
+            className="w-auto h-full rounded-lg max-h-[300px] mx-auto mb-4"
+            alt="nft enlarged"
+            onClick={(e) => e.stopPropagation()}
+            loading="lazy"
+          />
+        ) : (
+          <video
+            src={source?.image?.cachedUrl}
+            className="w-auto h-full rounded-lg max-h-[300px] mx-auto mb-4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+          />
+        )}
 
         <div className="mb-6">
           <h2 className="text-xl font-semibold mb-2">Contract Details:</h2>

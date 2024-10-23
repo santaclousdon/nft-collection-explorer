@@ -1,4 +1,10 @@
-import { alchemy } from '@/config';
+import { Alchemy, Network } from 'alchemy-sdk';
+
+const AlchemyConfig = {
+  apiKey: process.env.ALCHEMY_API_KEY,
+  network: Network.ETH_MAINNET,
+};
+export const alchemy = new Alchemy(AlchemyConfig);
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);

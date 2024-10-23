@@ -4,12 +4,9 @@ import Image from 'next/image';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="w-full bg-gray-900/50 border-t border-t-gray-800">
+    <footer className="w-full bg-transparent ">
       <div className="flex justify-between px-10 py-5">
-        <p className="flex gap-x-1">
-          ©Avocado 2024.{' '}
-          <span className="hidden md:block">All rights reserved.</span>{' '}
-        </p>
+        <p className="flex gap-x-1">© Avocado 2024. </p>
         <p className="flex gap-x-1">
           <Link href="https://t.me/santaclous112" target="_blank">
             <Image
@@ -20,7 +17,15 @@ const Footer: React.FC = () => {
             />
           </Link>
         </p>
-        <p>Created by Robin</p>
+        <p>
+          Created by{' '}
+          <Link
+            href="mailto:caballerorobin077@gmail.com"
+            className="text-blue font-monument"
+          >
+            ROBIN
+          </Link>
+        </p>
       </div>
     </footer>
   );

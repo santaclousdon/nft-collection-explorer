@@ -33,7 +33,6 @@ const Header: React.FC = () => {
     >
       <Link href="/" title="Avocado" aria-label="Avocado" className="z-10">
         <Logo />
-        <p className="text-white">Avocado</p>
       </Link>
 
       <div className="max-lg:pt-5 max-lg:pr-[15px] max-lg:pb-[30px] flex items-center justify-between">

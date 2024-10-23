@@ -33,12 +33,12 @@ const ConnectButton: React.FC = () => {
       <DropdownMenuTrigger asChild>
         <Button
           variant="secondary"
-          className="border border-white rounded-[12px] hover:bg-white hover:text-black"
+          className="text-xl border border-white rounded-[12px] hover:bg-blue hover:text-white"
         >
           {abbreviatedAddress}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-gray-700 border-none text-white">
+      <DropdownMenuContent className="bg-gray-900 border-none rounded-[5px] text-white">
         <DropdownMenuItem
           onClick={() => disconnect()}
           className="cursor-pointer"
@@ -52,9 +52,9 @@ const ConnectButton: React.FC = () => {
   const renderConnectButton = () => (
     <Button
       onClick={() => connect({ connector: injected() })}
-      className="border border-white rounded-[12px] hover:bg-white hover:text-black"
+      className="text-xl border border-white rounded-[12px] hover:bg-blue hover:text-white"
     >
-      Connect Wallet
+      Connect
     </Button>
   );
 
