@@ -28,7 +28,7 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className="animate fixed top-0 left-0 h-[78px] lg:h-[104px] w-full px-[15px] lg:px-[50px] py-5 lg:py-[30px] flex items-center justify-between z-10 border-b border-b-gray-900"
+      className="animate fixed top-0 left-0 h-[78px] lg:h-[104px] w-full px-[15px] lg:px-[50px] py-5 lg:py-[30px] flex items-center justify-between z-10"
       style={headerStyle}
     >
       <Link href="/" title="Avocado" aria-label="Avocado" className="z-10">

@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
-import { useAccount, useConnect, useDisconnect } from 'wagmi';
+import React, { useEffect, useState } from 'react';
+import { useAccount, useDisconnect } from 'wagmi';
 import {
   DropdownMenu,
   DropdownMenuContent,
