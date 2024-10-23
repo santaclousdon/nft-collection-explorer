@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import DetailModal from './DetailModal';
 import { NFT } from '@/types/types';
 
@@ -30,14 +24,11 @@ const NFTItem: React.FC<NFTItemProps> = ({ item }) => {
   const closeModal = () => setIsModalOpen(false);
 
   return (
-    <Card className="bg-grey-line/60 rounded-[12px] relative border-none py-10">
-      <CardHeader className="p-0">
-        <CardTitle className="uppercase text-xl font-monument lg:text-2xl xxl:text-[32px]  lg:mb-[15px] max-w-max overflow-hidden text-ellipsis whitespace-nowrap px-6 py-0">
+    <Card className="bg-grey-line/60 rounded-[12px] border-none relative">
+      <CardContent className="flex flex-col items-center gap-y-5 px-4 py-5 md:px-5 md:py-8">
+        <h2 className="uppercase text-xl font-monument lg:text-2xl xxl:text-[32px]  lg:mb-[15px] overflow-hidden text-ellipsis whitespace-nowrap max-w-full m-0">
           {item?.name}
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="py-0">
-        {/* NFT media display - handles both images and videos */}
+        </h2>
         <div
           onClick={handleImageClick}
           className="cursor-pointer w-full overflow-hidden"
@@ -69,14 +60,15 @@ const NFTItem: React.FC<NFTItemProps> = ({ item }) => {
         <div className="absolute right-[30px] top-[-10px] rounded-full bg-white text-black uppercase font-satoshi-bold text-xs px-[6px] py-[3px]">
           {item?.tokenType || 'ERC721'}
         </div>
+        <p className="text-sm lg:text-lg !leading-[1.3]  lg:px-[30px] overflow-hidden text-ellipsis line-clamp-3 max-h-[70px] md:max-h-[70px] lg:max-h-[90px]">
+          {item?.description ? (
+            item?.description
+          ) : (
+            <span className="text-gray-500">[No description]</span>
+          )}
+        </p>
       </CardContent>
-      <CardFooter className="text-sm lg:text-lg pt-4 !leading-[1.3]  lg:px-[30px] overflow-hidden text-ellipsis line-clamp-3 max-h-[70px] md:max-h-[70px] lg:max-h-[90px]">
-        {item?.description ? (
-          item?.description
-        ) : (
-          <span className="text-gray-500">[No description]</span>
-        )}
-      </CardFooter>
+
       {selectNFT && (
         <DetailModal
           source={selectNFT}

@@ -50,7 +50,7 @@ const DetailModal: React.FC<DetailModalProps> = ({
     <Dialog open={isModalOpen} onOpenChange={closeModal}>
       <DialogTitle className="invisible">{source?.name}</DialogTitle>
       <DialogContent className="bg-grey-line px-4 md:px-6 py-4 rounded-lg border-none max-h-[calc(100vh-200px)] overflow-y-auto">
-        <h2 className="font-monument text-white text-3xl font-bold text-center mb-4">
+        <h2 className="font-monument text-white text-3xl font-bold text-center">
           {source?.name}
         </h2>
         {source?.image?.contentType !== 'video/mp4' ? (
@@ -128,7 +128,13 @@ const DetailModal: React.FC<DetailModalProps> = ({
         </div>
         <div className="description">
           <h2 className="text-xl font-semibold mb-2">Description:</h2>
-          <p>{source?.description}</p>
+          <p>
+            {source?.description ? (
+              source?.description
+            ) : (
+              <span className="text-gray-500">[No Description]</span>
+            )}
+          </p>
         </div>
       </DialogContent>
     </Dialog>
