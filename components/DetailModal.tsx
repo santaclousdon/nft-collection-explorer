@@ -49,7 +49,7 @@ const DetailModal: React.FC<DetailModalProps> = ({
   return (
     <Dialog open={isModalOpen} onOpenChange={closeModal}>
       <DialogTitle className="invisible">{source?.name}</DialogTitle>
-      <DialogContent className="bg-grey-line px-4 md:px-6 py-4 rounded-lg border-none max-h-[calc(100vh-200px)] overflow-y-auto">
+      <DialogContent className="bg-grey-line px-4 md:px-6 py-4 rounded-[16px] border-none max-h-[calc(100vh-200px)] overflow-y-auto">
         <h2 className="font-monument text-white text-3xl font-bold text-center">
           {source?.name}
         </h2>
@@ -113,15 +113,21 @@ const DetailModal: React.FC<DetailModalProps> = ({
               )}
             </button>
           </p>
-          <p>
-            <strong>Name:</strong> {source?.contract.name}
-          </p>
-          <p>
-            <strong>Symbol:</strong> {source?.contract.symbol}
-          </p>
-          <p>
-            <strong>Total Supply:</strong> {source?.contract.totalSupply}
-          </p>
+          {source?.contract.name && (
+            <p>
+              <strong>Name:</strong> {source?.contract.name}
+            </p>
+          )}
+          {source?.contract.symbol && (
+            <p>
+              <strong>Symbol:</strong> {source?.contract.symbol}
+            </p>
+          )}
+          {source?.contract.totalSupply && (
+            <p>
+              <strong>Total Supply:</strong> {source?.contract.totalSupply}
+            </p>
+          )}
           <p>
             <strong>Token Type:</strong> {source?.contract.tokenType}
           </p>

@@ -45,7 +45,7 @@ const ConnectButton: React.FC = () => {
       <DropdownMenuContent className="bg-transparent text-white shadow-lg p-0 rounded-[10px] mr-0">
         <DropdownMenuItem
           onClick={() => disconnect()}
-          className="cursor-pointer hover:bg-gray-700 rounded-md p-2 w-full mx-auto"
+          className="cursor-pointer hover:bg-gray-700 rounded-md p-2 flex items-center justify-center w-full mx-auto min-w-none"
         >
           Disconnect
         </DropdownMenuItem>
