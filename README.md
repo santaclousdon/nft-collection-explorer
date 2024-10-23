@@ -1,8 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Avocado NFT List
+
+A Next.js application for viewing NFT collections with wallet integration.
+
+## Project Overview
+
+This application allows users to:
+
+- Connect their Web3 wallet
+- View their NFT collections
+- See detailed NFT information including images and metadata
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Set up environment variables:
+   - Copy `.env.example` to `.env`
+   - Add your Alchemy API key to `.env`:
+
+```bash
+ALCHEMY_API_KEY=your_api_key_here
+```
+
+Get your API key from [Alchemy Dashboard](https://dashboard.alchemy.com/)
+
+4. Run the development server:
 
 ```bash
 npm run dev
@@ -16,21 +44,12 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Third-Party Libraries
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **wagmi** ([docs](https://wagmi.sh/)) - React Hooks for Ethereum, providing wallet connection and interaction
+- **viem** ([docs](https://viem.sh/)) - TypeScript interface for Ethereum, used for blockchain interactions
+- **alchemy-sdk** ([docs](https://docs.alchemy.com/reference/alchemy-sdk-quickstart)) - NFT data fetching and blockchain API integration
+- **@radix-ui/react-\*** ([docs](https://www.radix-ui.com/)) - Unstyled, accessible UI components
+- **tailwindcss** ([docs](https://tailwindcss.com/)) - Utility-first CSS framework for styling
+- **class-variance-authority** ([docs](https://cva.style/docs)) - Managing component variants and styles
+- **lucide-react** ([docs](https://lucide.dev/)) - Icon components
