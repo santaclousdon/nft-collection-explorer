@@ -5,7 +5,7 @@ import { useAccount } from 'wagmi';
 import NFTItem from './NFTItem';
 import { NoResult } from './WaitConnect';
 import { NFT } from '@/types/types';
-import { Loader, Loader as LoaderIcon, SplineIcon } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 
 // Component to fetch and display user's NFT collection
 const NFTList: React.FC = () => {
@@ -46,7 +46,7 @@ const NFTList: React.FC = () => {
   // Render functions for different states
   const renderLoading = () => (
     <div className="flex justify-center items-center h-screen">
-      <Loader className="animate-spin" />
+      <Loader2 size={40} className="animate-spin" />
     </div>
   );
   const renderError = () => (

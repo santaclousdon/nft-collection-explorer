@@ -87,3 +87,19 @@ export type NFT = {
   balance: string;
   acquiredAt: {};
 };
+
+export type Transfer = {
+  blockNum: string;
+  uniqueId: string;
+  hash: string;
+  from: string;
+  to: string;
+  erc721TokenId: string;
+  erc1155Metadata: null | Object;
+  tokenId: string;
+  asset: string;
+  category: string;
+  metadata: {
+    blockTimestamp: string;
+  };
+};

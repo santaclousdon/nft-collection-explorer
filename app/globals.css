@@ -60,7 +60,8 @@ html {
 
 /* Scroll bar */
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 0px; /* Changed from 0px to 2px */
+  height: 1px; /* Added for horizontal scrollbar */
 }
 
 ::-webkit-scrollbar-track {
