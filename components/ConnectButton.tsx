@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import NetworkSwitcher from './SwtichButton';
-import { WalletOptions } from './wallet-options';
+import { WalletOptions } from './WalletOptions';
 
 const ConnectWallet = () => {
   const { isConnected } = useAccount();

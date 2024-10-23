@@ -22,7 +22,6 @@ const NFTList: React.FC = () => {
       if (res.ok) {
         const data = await res.json();
         setNfts(data?.ownedNfts || []);
-        console.log(data);
       } else {
         setError('Error fetching NFTs');
         console.error('Error fetching NFTs:', res.status);
