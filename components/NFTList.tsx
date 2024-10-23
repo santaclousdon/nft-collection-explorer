@@ -6,7 +6,8 @@ import NFTItem from './NFTItem';
 import { NoResult } from './WaitConnect';
 
 const NFTList: React.FC = () => {
-  const { address } = useAccount();
+  // const { address } = useAccount();
+  const address = '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270';
   const [loading, setLoading] = useState<boolean>(true);
   const [nfts, setNfts] = useState<any[]>([]);
 

@@ -6,19 +6,19 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import ImageModal from './ImageModal';
+import DetailModal from './DetailModal';
 
 type NFTItemProps = {
   item: any;
 };
 
 const NFTItem: React.FC<NFTItemProps> = ({ item }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [selectNFT, setSelectNFT] = useState<any>(null);
 
   const handleImageClick = () => {
     setIsModalOpen(true);
-    setSelectedImage(item?.image.originalUrl);
+    setSelectNFT(item);
   };
 
   const closeModal = () => setIsModalOpen(false);
@@ -44,8 +44,8 @@ const NFTItem: React.FC<NFTItemProps> = ({ item }) => {
         </div>
       </CardContent>
       <CardFooter className="text-white mt-5">{item?.description}</CardFooter>
-      <ImageModal
-        source={selectedImage}
+      <DetailModal
+        source={selectNFT}
         closeModal={closeModal}
         isModalOpen={isModalOpen}
       />
