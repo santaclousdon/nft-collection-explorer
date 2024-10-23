@@ -7,10 +7,12 @@ const NetworkSwitcher = () => {
   console.log(chainId);
   return (
     <div>
-      {chainId !== 1 && (
+      {chainId !== 1 ? (
         <button onClick={() => switchChain({ chainId: 1 })}>
           Switch to Ethereum Mainnet
         </button>
+      ) : (
+        <></>
       )}
     </div>
   );

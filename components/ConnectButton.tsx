@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import {
   DropdownMenu,
@@ -8,20 +8,28 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { injected } from 'wagmi/connectors';
 import { Button } from '@/components/ui/button';
 import NetworkSwitcher from './SwtichButton';
+import { WalletOptions } from './wallet-options';
+
+const ConnectWallet = () => {
+  const { isConnected } = useAccount();
+  if (!isConnected) return <WalletOptions />;
+};
 
 const ConnectButton: React.FC = () => {
-  const { connect } = useConnect();
   const { disconnect } = useDisconnect();
   const { address } = useAccount();
 
   const [mounted, setMounted] = useState<boolean>(false);
+  const [showConnectWallet, setShowConnectWallet] = useState<boolean>(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+  useEffect(() => {
+    setShowConnectWallet(false);
+  }, [address]);
 
   const abbreviatedAddress = address
     ? `${address.slice(0, 6)}...${address.slice(-4)}`
@@ -46,7 +54,6 @@ const ConnectButton: React.FC = () => {
         >
           Disconnect
         </DropdownMenuItem>
-
         <DropdownMenuItem>
           <NetworkSwitcher />
         </DropdownMenuItem>
@@ -56,14 +63,23 @@ const ConnectButton: React.FC = () => {
 
   const renderConnectButton = () => (
     <Button
-      onClick={() => connect({ connector: injected() })}
+      onClick={() => setShowConnectWallet(true)}
       className="text-xl border border-white rounded-[12px] hover:bg-blue hover:text-white"
     >
       Connect
     </Button>
   );
 
-  return <>{address ? renderConnectedButton() : renderConnectButton()}</>;
+  return (
+    <>
+      {address ? renderConnectedButton() : renderConnectButton()}
+      {showConnectWallet && (
+        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
+          <ConnectWallet />
+        </div>
+      )}
+    </>
+  );
 };
 
 export default ConnectButton;

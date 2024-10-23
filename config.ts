@@ -1,18 +1,14 @@
 import { http, createConfig } from 'wagmi';
-import { mainnet, sepolia } from 'wagmi/chains';
+import { mainnet, sepolia, base, optimism } from 'wagmi/chains';
+import { injected, metaMask, safe, coinbaseWallet } from 'wagmi/connectors';
 
 export const config = createConfig({
-  chains: [mainnet, sepolia],
+  chains: [mainnet, base, optimism, sepolia],
+  connectors: [injected(), metaMask(), safe(), coinbaseWallet()],
   transports: {
     [mainnet.id]: http(),
+    [base.id]: http(),
+    [optimism.id]: http(),
     [sepolia.id]: http(),
   },
 });
-
-import { Alchemy, Network } from 'alchemy-sdk';
-
-const AlchemyConfig = {
-  apiKey: process.env.ALCHEMY_API_KEY,
-  network: Network.ETH_MAINNET,
-};
-export const alchemy = new Alchemy(AlchemyConfig);
