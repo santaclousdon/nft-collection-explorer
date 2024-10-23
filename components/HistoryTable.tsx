@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import Link from 'next/link';
 import { useState } from 'react';
-import { Clipboard } from 'lucide-react';
+import { Copy } from 'lucide-react';
 import {
   Table,
   TableBody,
@@ -12,27 +12,10 @@ import {
 } from '@/components/ui/table';
 import useIsMobile from '@/hook/useIsMobile';
 import { Transfer } from '@/types/types';
+import { formatTimeAgo } from '@/lib/functions';
 
 type HistoryTableProps = {
   history: Transfer[];
-};
-
-const formatTimeAgo = (timestamp: string) => {
-  const now = new Date();
-  const then = new Date(timestamp);
-  const seconds = Math.floor((now.getTime() - then.getTime()) / 1000);
-
-  let interval = Math.floor(seconds / 31536000);
-  if (interval > 1) return `${interval} yrs ago`;
-  interval = Math.floor(seconds / 2592000);
-  if (interval > 1) return `${interval} mons ago`;
-  interval = Math.floor(seconds / 86400);
-  if (interval > 1) return `${interval} days ago`;
-  interval = Math.floor(seconds / 3600);
-  if (interval > 1) return `${interval} hrs ago`;
-  interval = Math.floor(seconds / 60);
-  if (interval > 1) return `${interval} mins ago`;
-  return `${seconds} seconds ago`;
 };
 
 const HistoryTable: React.FC<HistoryTableProps> = React.memo(({ history }) => {
@@ -56,17 +39,19 @@ const HistoryTable: React.FC<HistoryTableProps> = React.memo(({ history }) => {
     }, 2000);
   }, []);
 
-  const renderAddressCell = (address: string) => (
+  const renderAddressCell = (address: string, type: 'hash' | 'address') => (
     <div className="flex gap-x-2 items-center">
       <Link
-        href={`https://etherscan.io/address/${address}`}
+        href={`https://etherscan.io/${
+          type === 'hash' ? 'tx' : 'address'
+        }/${address}`}
         target="_blank"
         className="hover:text-blue"
       >
         {abbreviateAddress(address)}
       </Link>
       <div className="relative">
-        <Clipboard
+        <Copy
           size={14}
           className="text-blue hover:text-white cursor-pointer"
           onClick={() => handleCopy(address)}
@@ -94,10 +79,10 @@ const HistoryTable: React.FC<HistoryTableProps> = React.memo(({ history }) => {
       <TableBody>
         {history.map((transfer: Transfer) => (
           <TableRow key={transfer.hash}>
-            <TableCell>{renderAddressCell(transfer.hash)}</TableCell>
+            <TableCell>{renderAddressCell(transfer.hash, 'hash')}</TableCell>
             <TableCell>{parseInt(transfer.blockNum, 16)}</TableCell>
-            <TableCell>{renderAddressCell(transfer.from)}</TableCell>
-            <TableCell>{renderAddressCell(transfer.to)}</TableCell>
+            <TableCell>{renderAddressCell(transfer.from, 'address')}</TableCell>
+            <TableCell>{renderAddressCell(transfer.to, 'address')}</TableCell>
             <TableCell className="text-nowrap">
               {formatTimeAgo(transfer.metadata.blockTimestamp)}
             </TableCell>

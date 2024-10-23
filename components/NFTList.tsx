@@ -9,8 +9,7 @@ import { Loader2 } from 'lucide-react';
 
 // Component to fetch and display user's NFT collection
 const NFTList: React.FC = () => {
-  // const { address } = useAccount();
-  const address = '0x255DcfA35b70fC60BFAc74fFDFB4782b441a1963';
+  const { address } = useAccount();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [nfts, setNfts] = useState<NFT[]>([]);

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
-import { NFT, Transfer } from '@/types/types';
-import { Clipboard, Loader2 } from 'lucide-react';
-import useIsMobile from '@/hook/useIsMobile';
+import { Copy, Loader2 } from 'lucide-react';
 import HistoryTable from './HistoryTable';
 import Link from 'next/link';
+import { NFT, Transfer } from '@/types/types';
+import useIsMobile from '@/hook/useIsMobile';
 
 type DetailModalProps = {
   source: NFT;
@@ -22,14 +22,19 @@ const DetailModal: React.FC<DetailModalProps> = ({
   const [historyLoading, setHistoryLoading] = useState<boolean>(true);
   const fetchHistory = async () => {
     setHistoryLoading(true);
-    const res = await fetch(
-      `/api/history?address=${source?.contract.address}&tokenId=${source?.tokenId}`
-    );
-    if (res.ok) {
-      const data = await res.json();
-      setHistory(data);
+    try {
+      const res = await fetch(
+        `/api/history?address=${source?.contract.address}&tokenId=${source?.tokenId}`
+      );
+      if (res.ok) {
+        const data = await res.json();
+        setHistory(data);
+      }
+    } catch (error) {
+      console.error('Failed to fetch history:', error);
+    } finally {
+      setHistoryLoading(false);
     }
-    setHistoryLoading(false);
   };
 
   useEffect(() => {
@@ -56,102 +61,111 @@ const DetailModal: React.FC<DetailModalProps> = ({
   return (
     <Dialog open={isModalOpen} onOpenChange={closeModal}>
       <DialogTitle className="invisible">{source?.name}</DialogTitle>
-      <DialogContent className="bg-grey-line px-4 md:px-6 py-6 rounded-[16px] border-none max-h-[calc(100vh-200px)] max-w-[99vw] xs:max-w-[80vw] lg:max-w-[60vw]">
-        <div className="flex flex-col pb-5 gap-y-6 max-h-[calc(100vh-240px)] overflow-auto">
-          <div className="flex flex-col items-center gap-y-6">
-            <h2 className="font-monument text-white text-3xl font-bold text-center">
-              {source?.name}
-            </h2>
-            {source?.image?.contentType !== 'video/mp4' ? (
-              <img
-                src={source?.image?.cachedUrl || '/images/nft-placeholder.png'}
-                className="w-auto h-full rounded-lg max-h-[300px] lg:max-h-[430px] mx-auto mb-4"
-                alt="nft enlarged"
-                onClick={(e) => e.stopPropagation()}
-                loading="lazy"
-              />
-            ) : (
-              <video
-                src={source?.image?.originalUrl}
-                className="w-auto h-full rounded-lg max-h-[300px] lg:max-h-[430px] mx-auto mb-4"
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-              />
-            )}
-
+      <DialogContent className="bg-grey-line px-4 md:px-10 py-10 rounded-[16px] border-none max-h-[calc(100vh-200px)] max-w-[99vw] xs:max-w-[80vw] lg:max-w-[60vw]">
+        <h2 className="font-monument text-white text-3xl font-bold text-left text-gradient">
+          {source?.name}
+        </h2>
+        <div className="flex flex-col pb-5 mt-10 gap-y-6 max-h-[calc(100vh-380px)] overflow-auto">
+          <div className="flex flex-col md:flex-row md:justify-center gap-x-10">
+            <div className="w-full md:max-w-[50%]">
+              {source?.image?.contentType !== 'video/mp4' ? (
+                <img
+                  src={
+                    source?.image?.cachedUrl || '/images/nft-placeholder.png'
+                  }
+                  className="w-auto h-full rounded-lg max-h-[300px] lg:max-h-[350px] mx-auto lg:mx-0 mb-4"
+                  alt="nft enlarged"
+                  onClick={(e) => e.stopPropagation()}
+                  loading="lazy"
+                />
+              ) : (
+                <video
+                  src={source?.image?.originalUrl}
+                  className="w-auto h-full rounded-lg max-h-[300px] lg:max-h-[350px] mx-auto lg:mx-0 mb-4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                />
+              )}
+            </div>
             <div className="mb-2">
-              <h2 className="text-xl font-semibold mb-2">Contract Details:</h2>
-              <p className="">
-                <strong>Address:</strong>{' '}
-                <Link
-                  href={`https://etherscan.io/address/${source?.contract.address}`}
-                  target="_blank"
-                  className="hover:text-blue"
-                >
-                  {abbreviateAddress(source?.contract.address)}
-                </Link>
-                <button
-                  onClick={() =>
-                    copyToClipboard(source?.contract.address, 'contractAddress')
-                  }
-                  className="ml-2 relative"
-                >
-                  <Clipboard size={14} className="text-blue hover:text-white" />
+              <h2 className="text-2xl font-semibold mb-2">Token Details:</h2>
+              <div className="flex flex-col gap-y-2">
+                <p>
+                  <strong>Address:</strong>{' '}
+                  <Link
+                    href={`https://etherscan.io/address/${source?.contract.address}`}
+                    target="_blank"
+                    className="hover:text-blue"
+                  >
+                    {abbreviateAddress(source?.contract.address)}
+                  </Link>
+                  <button
+                    onClick={() =>
+                      copyToClipboard(
+                        source?.contract.address,
+                        'contractAddress'
+                      )
+                    }
+                    className="ml-2 relative"
+                  >
+                    <Copy size={14} className="text-blue hover:text-white" />
 
-                  {tooltipVisible.contractAddress && (
-                    <p className="text-white absolute top-[-40px] text-xs -left-4 p-2 bg-black rounded-[12px]">
-                      Copied
-                    </p>
-                  )}
-                </button>
-              </p>
-              <p className="">
-                <strong>Deployer:</strong>{' '}
-                <Link
-                  href={`https://etherscan.io/address/${source?.contract.contractDeployer}`}
-                  target="_blank"
-                  className="hover:text-blue"
-                >
-                  {abbreviateAddress(source?.contract.contractDeployer)}
-                </Link>
-                <button
-                  onClick={() =>
-                    copyToClipboard(
-                      source?.contract.contractDeployer,
-                      'deployerAddress'
-                    )
-                  }
-                  className="ml-2 relative"
-                >
-                  <Clipboard size={14} className="text-blue hover:text-white" />
-                  {tooltipVisible.deployerAddress && (
-                    <p className="text-white absolute top-[-40px] text-xs -left-4 p-2 bg-black rounded-[12px]">
-                      Copied
-                    </p>
-                  )}
-                </button>
-              </p>
-              {source?.contract.name && (
-                <p>
-                  <strong>Name:</strong> {source?.contract.name}
+                    {tooltipVisible.contractAddress && (
+                      <p className="text-white absolute top-[-40px] text-xs -left-4 p-2 bg-black rounded-[12px]">
+                        Copied
+                      </p>
+                    )}
+                  </button>
                 </p>
-              )}
-              {source?.contract.symbol && (
                 <p>
-                  <strong>Symbol:</strong> {source?.contract.symbol}
+                  <strong>Deployer:</strong>{' '}
+                  <Link
+                    href={`https://etherscan.io/address/${source?.contract.contractDeployer}`}
+                    target="_blank"
+                    className="hover:text-blue"
+                  >
+                    {abbreviateAddress(source?.contract.contractDeployer)}
+                  </Link>
+                  <button
+                    onClick={() =>
+                      copyToClipboard(
+                        source?.contract.contractDeployer,
+                        'deployerAddress'
+                      )
+                    }
+                    className="ml-2 relative"
+                  >
+                    <Copy size={14} className="text-blue hover:text-white" />
+                    {tooltipVisible.deployerAddress && (
+                      <p className="text-white absolute top-[-40px] text-xs -left-4 p-2 bg-black rounded-[12px]">
+                        Copied
+                      </p>
+                    )}
+                  </button>
                 </p>
-              )}
-              {source?.contract.totalSupply && (
+                {source?.contract.name && (
+                  <p>
+                    <strong>Name:</strong> {source?.contract.name}
+                  </p>
+                )}
+                {source?.contract.symbol && (
+                  <p>
+                    <strong>Symbol:</strong> {source?.contract.symbol}
+                  </p>
+                )}
+                {source?.contract.totalSupply && (
+                  <p>
+                    <strong>Total Supply:</strong>{' '}
+                    {source?.contract.totalSupply}
+                  </p>
+                )}
                 <p>
-                  <strong>Total Supply:</strong> {source?.contract.totalSupply}
+                  <strong>Token Type:</strong> {source?.contract.tokenType}
                 </p>
-              )}
-              <p>
-                <strong>Token Type:</strong> {source?.contract.tokenType}
-              </p>
+              </div>
             </div>
           </div>
           <div className="history">

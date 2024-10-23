@@ -26,7 +26,7 @@ const NFTItem: React.FC<NFTItemProps> = ({ item }) => {
   return (
     <Card className="bg-grey-line/60 rounded-[12px] border-none relative">
       <CardContent className="flex flex-col items-center gap-y-5 px-4 py-5 md:px-5 md:py-8">
-        <h2 className="uppercase text-xl font-monument lg:text-2xl xxl:text-[32px]  lg:mb-[15px] overflow-hidden text-ellipsis whitespace-nowrap max-w-full m-0">
+        <h2 className="uppercase text-xl font-monument lg:text-2xl xxl:text-[32px]  lg:mb-[15px] overflow-hidden text-ellipsis whitespace-nowrap max-w-full m-0 text-gradient">
           {item?.name}
         </h2>
         <div
