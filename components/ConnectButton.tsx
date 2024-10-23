@@ -11,6 +11,7 @@ import {
 import { Button } from '@/components/ui/button';
 import NetworkSwitcher from './SwtichButton';
 import { WalletOptions } from './WalletOptions';
+import WalletListModal from './WalletListModal';
 
 const ConnectWallet = () => {
   const { isConnected } = useAccount();
@@ -73,11 +74,10 @@ const ConnectButton: React.FC = () => {
   return (
     <>
       {address ? renderConnectedButton() : renderConnectButton()}
-      {showConnectWallet && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
-          <ConnectWallet />
-        </div>
-      )}
+      <WalletListModal
+        showConnectWallet={showConnectWallet}
+        setShowConnectWallet={setShowConnectWallet}
+      />
     </>
   );
 };
