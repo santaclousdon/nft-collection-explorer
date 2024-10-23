@@ -7,16 +7,19 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import DetailModal from './DetailModal';
+import { NFT } from '@/types/types';
+
+// Define the NFT type based on the provided structure
 
 type NFTItemProps = {
-  item: any;
+  item: NFT;
 };
 
 // Component to display individual NFT card with details
 const NFTItem: React.FC<NFTItemProps> = ({ item }) => {
   // State for modal visibility and selected NFT
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [selectNFT, setSelectNFT] = useState<any>(null);
+  const [selectNFT, setSelectNFT] = useState<NFT | null>(null);
 
   // Handlers for modal open/close
   const handleImageClick = () => {
@@ -71,11 +74,13 @@ const NFTItem: React.FC<NFTItemProps> = ({ item }) => {
       <CardFooter className="text-white mt-5 overflow-hidden text-ellipsis line-clamp-5">
         {item?.description}
       </CardFooter>
-      <DetailModal
-        source={selectNFT}
-        closeModal={closeModal}
-        isModalOpen={isModalOpen}
-      />
+      {selectNFT && (
+        <DetailModal
+          source={selectNFT}
+          closeModal={closeModal}
+          isModalOpen={isModalOpen}
+        />
+      )}
     </Card>
   );
 };

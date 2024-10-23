@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
+import { NFT } from '@/types/types';
 
 type DetailModalProps = {
-  source: any;
+  source: NFT;
   closeModal: () => void;
   isModalOpen: boolean;
 };
@@ -13,18 +14,6 @@ const DetailModal: React.FC<DetailModalProps> = ({
   closeModal,
   isModalOpen,
 }) => {
-  const fetchHistory = async () => {
-    const response = await fetch(
-      `/api/history?address=${source?.contract?.address}&tokenType=${source?.contract?.tokenType}&tokenId=${source?.contract?.tokenId}`
-    );
-    const data = await response.json();
-    console.log(data);
-  };
-  useEffect(() => {
-    if (source?.contract?.address) {
-      fetchHistory();
-    }
-  }, [source]);
   return (
     <Dialog open={isModalOpen} onOpenChange={closeModal}>
       <DialogTitle className="invisible">{source?.name}</DialogTitle>

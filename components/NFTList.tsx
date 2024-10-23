@@ -4,13 +4,14 @@ import React, { useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
 import NFTItem from './NFTItem';
 import { NoResult } from './WaitConnect';
+import { NFT } from '@/types/types';
 
 // Component to fetch and display user's NFT collection
 const NFTList: React.FC = () => {
   const { address } = useAccount();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [nfts, setNfts] = useState<any[]>([]);
+  const [nfts, setNfts] = useState<NFT[]>([]);
 
   // Fetch NFTs from the API for connected wallet
   const fetchNFTs = async () => {

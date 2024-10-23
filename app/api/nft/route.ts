@@ -14,6 +14,7 @@ export async function GET(request: Request) {
     const nfts = await alchemy.nft.getNftsForOwner(address);
     return Response.json(nfts);
   } catch (error) {
+    console.error(error);
     return new Response('Failed to fetch NFTs', { status: 500 });
   }
 }
