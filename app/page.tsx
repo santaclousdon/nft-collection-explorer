@@ -28,7 +28,7 @@ const Home: React.FC = () => {
   }
 
   return (
-    <div className="max-w-[1480px] px-4 py-10 lg:px-5 xl:mx-auto">
+    <div className="max-w-[1480px] pt-20 py-10 lg:px-5 xl:mx-auto">
       {!isAddressAvailable ? <WaitConnect /> : <NFTList />}{' '}
     </div>
   );
