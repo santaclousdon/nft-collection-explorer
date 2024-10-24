@@ -28,8 +28,23 @@ const Home: React.FC = () => {
   }
 
   return (
-    <div className="max-w-[1480px] pt-20 py-10 lg:px-5 xl:mx-auto">
-      {!isAddressAvailable ? <WaitConnect /> : <NFTList />}{' '}
+    <div className="pt-20 py-10 xl:mx-auto">
+      {!isAddressAvailable ? (
+        <WaitConnect />
+      ) : (
+        <div className="relative">
+          <div className="max-w-[1480px] mx-auto px-2 lg:px-5">
+            <NFTList />
+          </div>{' '}
+          <div className="absolute bottom-0 right-0 left-0 w-full z-[-1] top-0">
+            <video autoPlay loop muted className="w-full h-full object-cover">
+              <source src="/videos/roadmap-video.mp4" type="video/mp4" />
+            </video>
+            <div className="absolute left-0 top-0 w-full h-full bg-linear mix-blend-soft-light" />
+            <div className="absolute left-0 top-0 w-full h-full bg-linearShadow" />
+          </div>
+        </div>
+      )}{' '}
     </div>
   );
 };

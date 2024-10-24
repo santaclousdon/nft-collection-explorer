@@ -37,7 +37,7 @@ const ConnectButton: React.FC = () => {
       <DropdownMenuTrigger asChild>
         <Button
           variant="secondary"
-          className="text-xl border border-white rounded-[12px]  hover:bg-blue hover:border-transparent hover:text-white"
+          className="text-xl border-[2px] border-white rounded-[12px]  hover:bg-blue hover:border-transparent hover:text-white"
         >
           {abbreviatedAddress}
         </Button>
@@ -61,7 +61,7 @@ const ConnectButton: React.FC = () => {
   const renderConnectButton = () => (
     <Button
       onClick={() => setShowConnectWallet(true)}
-      className=" text-base md:text-xl border border-white rounded-[12px] px-2 md:px-5 py-0 md:py-2 hover:bg-blue hover:border-transparent hover:text-white"
+      className=" text-base md:text-xl border-[2px] border-white rounded-[12px] px-2 md:px-5 py-0 md:py-2 hover:bg-blue hover:border-transparent hover:text-white"
     >
       Connect
     </Button>

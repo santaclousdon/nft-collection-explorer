@@ -61,7 +61,7 @@ const DetailModal: React.FC<DetailModalProps> = ({
   return (
     <Dialog open={isModalOpen} onOpenChange={closeModal}>
       <DialogTitle className="invisible">{source?.name}</DialogTitle>
-      <DialogContent className="bg-grey-line px-4 md:px-10 py-10 rounded-[16px] border-none max-h-[calc(100vh-200px)] max-w-[99vw] xs:max-w-[80vw] lg:max-w-[60vw]">
+      <DialogContent className="bg-grey-line px-4 md:px-10 py-10 rounded-[20px] border-none max-h-[calc(100vh-200px)] max-w-[99vw] xs:max-w-[80vw] lg:max-w-[60vw] md:rounded-[20px]">
         <h2 className="font-monument text-white text-3xl font-bold text-left text-gradient">
           {source?.name}
         </h2>
@@ -73,7 +73,7 @@ const DetailModal: React.FC<DetailModalProps> = ({
                   src={
                     source?.image?.cachedUrl || '/images/nft-placeholder.png'
                   }
-                  className="w-auto h-full rounded-lg max-h-[300px] lg:max-h-[350px] mx-auto lg:mx-0 mb-4"
+                  className="w-auto h-full max-h-[300px] lg:max-h-[350px] mx-auto lg:mx-0 mb-4 rounded-[20px]"
                   alt="nft enlarged"
                   onClick={(e) => e.stopPropagation()}
                   loading="lazy"

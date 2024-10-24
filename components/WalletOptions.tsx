@@ -18,7 +18,7 @@ export const WalletOptions = () => {
       <p className="text-2xl font-bold text-left">Connect Wallet</p>
       {connectors.map((connector, index) => (
         <button
-          className="w-full h-[56px] px-2 py-2 border-[2px] rounded-[12px] text-xl hover:bg-blue hover:border-transparent  transition-all flex items-center gap-x-4 justify-start"
+          className="w-full h-[56px] px-4 py-2 border-[2px] rounded-[12px] text-xl hover:bg-blue hover:border-transparent  transition-all flex items-center gap-x-4 justify-start"
           key={connector.uid}
           onClick={() => connect({ connector })}
         >
