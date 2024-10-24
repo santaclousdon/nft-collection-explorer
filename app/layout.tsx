@@ -6,8 +6,8 @@ import { Providers } from '../providers';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Avocado NFT List',
-  description: 'Avocado NFT List',
+  title: 'Avocado DAO NFT List',
+  description: 'Avocado DAO NFT List',
 };
 
 export default function RootLayout({
@@ -17,6 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon/favicon-32x32.png" sizes="32x32" />
+      </head>
       <body className="bg-black text-white font-satoshi-regular">
         <Providers>
           <Header />

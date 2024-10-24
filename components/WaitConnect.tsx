@@ -19,7 +19,7 @@ const VideoSection: React.FC = () => (
 const TextSection: React.FC<MessageSectionProps> = ({ message }) => (
   <div className="lg:flex-1 flex flex-col items-center">
     <h2 className="font-monument uppercase text-[30px] md:text-[36px] leading-[1.2] mb-[20px] lg:mb-6 lg:text-[42px] text-center">
-      Avocado NFT LIST
+      Avocado DAO NFT LIST
     </h2>
     <p className="w-fit font-satoshi-bold text-lg leading-[1.4] text-gradient mb-6 lg:text-[24px] lg:mb-12 text-center">
       {message}

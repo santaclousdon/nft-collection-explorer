@@ -1,4 +1,4 @@
-# Avocado NFT List
+# Avocado DAO NFT List
 
 A Next.js application for viewing NFT collections with wallet integration.
 

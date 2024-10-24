@@ -49,11 +49,11 @@ const Footer: React.FC = () => {
   return (
     <footer className="w-full bg-transparent z-50 relative">
       <div className="flex flex-col md:justify-between md:flex-row items-center px-10 md:py-5">
-        <p className=" gap-x-1 text-xl hidden md:block">© Avocado 2024. </p>
+        <p className=" gap-x-1 text-xl hidden md:block">© Avocado DAO 2024. </p>
 
         <SocialMediaLinks />
 
-        <p className="flex gap-x-1 text-xl md:hidden mt-4">© Avocado 2024. </p>
+        <p className="flex gap-x-1 text-xl md:hidden mt-4">© Avocado DAO 2024. </p>
         <p className="text-xl">
           Created by{' '}
           <Link
