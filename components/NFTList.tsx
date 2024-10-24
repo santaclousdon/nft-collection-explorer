@@ -26,7 +26,6 @@ const NFTList: React.FC = () => {
         setNfts(data?.ownedNfts || []);
       } else {
         setError('Error fetching NFTs');
-        console.error('Error fetching NFTs:', res.status);
       }
     } catch (error) {
       console.error('Fetch error:', error);
@@ -54,11 +53,26 @@ const NFTList: React.FC = () => {
     </div>
   );
   const renderNFTs = () => (
-    <section className="relative pb-[58px] py-20 grid-cols-1 lg:py-20 gap-7 lg:gap-10 grid md:grid-cols-2 lg:grid-cols-3">
-      {nfts.map((nft, index) => (
-        <NFTItem key={index} item={nft} />
-      ))}
-    </section>
+
+    <div className="relative">
+      <div className="max-w-[1480px] mx-auto px-10 lg:px-5">
+        <section className="relative pb-[58px] py-20 grid-cols-1 lg:py-20 gap-7 lg:gap-10 grid md:grid-cols-2 lg:grid-cols-3">
+          {nfts.map((nft, index) => (
+            <NFTItem key={index} item={nft} />
+          ))}
+
+        </section>
+      </div>
+      <div className="fixed top-0 right-0 left-0 w-full z-[-1]">
+        <div className="relative h-full overflow-hidden">
+          <video autoPlay loop muted className="w-full h-screen object-cover">
+            <source src="/videos/roadmap-video.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div className="absolute left-0 top-0 w-full h-full bg-linear mix-blend-soft-light" />
+        <div className="absolute left-0 top-0 w-full h-full bg-linearShadow" />
+      </div>
+    </div>
   );
 
   const renderNoResult = () => <NoResult />;
@@ -67,10 +81,10 @@ const NFTList: React.FC = () => {
   return loading
     ? renderLoading()
     : error
-    ? renderError()
-    : nfts.length > 0
-    ? renderNFTs()
-    : renderNoResult();
+      ? renderError()
+      : nfts.length > 0
+        ? renderNFTs()
+        : renderNoResult();
 };
 
 export default NFTList;
