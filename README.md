@@ -10,6 +10,16 @@ This application allows users to:
 - View their NFT collections
 - See detailed NFT information including images and metadata
 
+## Demo
+
+- Desktop
+
+<img src="./public/demo/Overview_Desktop.gif" alt="DEMO_Desktop" />
+
+- Mobile
+
+<img src="./public/demo/Overview_Mobile.gif" alt="DEMO_Mobile" />
+
 ## Features
 
 - **Wallet Connect**: Seamlessly connect your Ethereum-compatible wallets using **wagmi**.
@@ -66,5 +76,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - **alchemy-sdk** ([docs](https://docs.alchemy.com/reference/alchemy-sdk-quickstart)) - NFT data fetching and blockchain API integration
 - **@radix-ui/react-\*** ([docs](https://www.radix-ui.com/)) - Unstyled, accessible UI components
 - **tailwindcss** ([docs](https://tailwindcss.com/)) - Utility-first CSS framework for styling
+- **shadcn/ui** ([docs](https://ui.shadcn.com/)) - Utility-shadcn for building accessible and customizable UI components
 - **class-variance-authority** ([docs](https://cva.style/docs)) - Managing component variants and styles
 - **lucide-react** ([docs](https://lucide.dev/)) - Icon components
