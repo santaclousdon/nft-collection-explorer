@@ -33,7 +33,7 @@ const Home: React.FC = () => {
         <WaitConnect />
       ) : (
         <div className="relative">
-          <div className="max-w-[1480px] mx-auto px-2 lg:px-5">
+          <div className="max-w-[1480px] mx-auto px-10 lg:px-5">
             <NFTList />
           </div>{' '}
           <div className="absolute bottom-0 right-0 left-0 w-full z-[-1] top-0">
