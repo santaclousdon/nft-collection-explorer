@@ -25,13 +25,13 @@ const Header: React.FC = () => {
   // Update header style based on scroll position
   useEffect(() => {
     setHeaderStyle({
-      backgroundColor: scrollY > 50 ? '#000000ea' : 'transparent',
+      backgroundColor: scrollY > 50 ? '#000000aa' : 'transparent',
     });
   }, [scrollY]);
 
   return (
     <header
-      className="animate fixed top-0 left-0 h-[78px] lg:h-[104px] w-full px-[15px] lg:px-[50px] py-5 lg:py-[30px] flex items-center justify-between z-10"
+      className="animate fixed top-0 left-0 h-[78px] lg:h-[104px] w-full px-[15px] lg:px-[50px] py-5 lg:py-[30px] flex items-center justify-between z-10 backdrop-blur-md"
       style={headerStyle}
     >
       <Link
